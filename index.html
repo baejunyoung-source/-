@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML5 Basic Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // window.onload는 하나만 유효해서 한곳에 모아서 넣기
+        window.onload= function () {
+            let button = document.getElementById('button');
+            button.onclick= function () {
+                // 좋아요 버튼이 없다는 경고(좋아요 수 확인하는 로직은 적용x) 
+                alert('좋아요가 없습니다');
+                //기본 이벤트를 제거해서 페이지 이동을 막음
+                return false;
+            };
+            // getElementById는 한 객체만 선택하기때문에 class로 여러개 불러오기
+            let buttons = document.getElementsByClassName('inner-menu-item');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                alert('아직 매장이 준비중입니다');
+                return false;
+                };
+            }
+            let button2 = document.getElementById('popular-list');
+            button2.onclick= function () {
+                alert('현재 인기글이 없습니다');
+                return false;
+            };
+        };
+ 
+        // 43쪽 애니메이션 효과 
+        $(document).ready(function () {
+            $('.intro').css({
+                opacity: 0,
+            }).animate({
+                opacity: 1
+            }, 3000);
+        });
+        // 풀다운 456쪽
+        $(document).ready(function () {
+            $('.outer-menu-item').hover(function(){
+                $(this).find('.inner-menu').show();
+            },function(){ 
+                $(this).find('.inner-menu').hide(); 
+            });
+        });
+    </script>
+    <!-- 자바스크립트 455쪽하려면 script부분에 작성하면 됨 -->
+    <!-- 1. 초기화하기 -->
+     <style>
+        *{
+            margin: 0; padding:0;
+            font-family: '맑은 고딕','Malgun Gothic','Gothic',sans-serif;  
+        }
+        /* 전체 링크태그에 밑줄제거 */
+        a{text-decoration: none;}
+        li{list-style: none;}
+    </style>
+    <!-- 2. 페이지구성 -->
+    <style>
+        /* 배경색깔 */
+        body{
+            /* 중앙 정렬 */
+            /* 화면크기가 작아지면 유동적으로 줄어들수 있게 max-width로 설정 */
+            max-width: 1560px; margin: 0 auto;
+
+            /* 배경이미지부분 설정 */
+            background-image: url('KakaoTalk_20251208_025850527.jpg');
+            /* 너비조정하기 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: bottom;
+        }
+        /* 내부는 하얀색 */
+        #page-wrapper{
+            background: white;
+            /* 위아래 40px 좌우 0px padding은 안쪽으로 여백이 생겨 읽기 편함 */
+            margin: 40px 0;  padding: 10px 20px;
+            border-radius: 5px;
+            /* 00.3s 틀린거임*/
+            /* x축 0 아래로 8px라서 살짝 볼수있음 */
+            box-shadow: 0 8px 6px rgba(219, 13, 13, 0.3);
+        }
+        /* 폰트 italic체로 변경 */
+        .font_italic{font-style: italic;}
+        /* 두께 bold로 변경 */
+        .font_bold{font-weight: bold;}
+    </style>
+     <!-- 3. 헤더 구성 -->
+    <style>
+        #main-header hgroup {
+            /* img, h1같은 요소들을 가로방향으로 나란히 배치 */
+            display: flex;
+            /* flex에서 요소들을 위에서 아래로 나열하게함 */
+            flex-direction: column;
+        }
+        
+        #main-header{padding: 40px 50px;}
+        .master-title{
+            /* h1태그 32px가 기본이니까 살짝 작음 */
+            font-size: 30px;
+            color: rgb(42, 58, 180);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+        }
+        .master-description{
+            /* 훨씬 작아지고 굵기도 얇아짐 */
+            font-size: 15px;  font-weight: 500;
+            color: #383838;
+        }
+    </style>
+      <!-- 4. 내비게이션 및 풀다운 메뉴 구성 -->
+    <style>
+        #main-navigation{
+            border-top: 1px solid #c8c8c8;
+            border-bottom: 1px solid #c8c8c8;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+        /* .outer-menu li:nth-child(2n){background-color:  rgb(215, 227, 177);}
+        .outer-menu li:nth-child(2n+1){background-color:  rgb(124, 158, 96);} */
+        .outer-menu-item{
+            float: left;
+            /* 이거 하는이유는 inner-menu에 그 부모위치를 정확히 하기위해 */
+            position: relative;
+        }
+        .outer-menu-item:hover{
+            /* 아래 두개다 해야지 보임 */
+            background: rgb(146, 133, 133);
+        }
+        .menu-title{
+            /* hover영역이 커지는 기능 */
+            display: block;
+            height: 30px; line-height: 30px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+        .inner-menu{
+            display: none;
+            position: absolute;
+            top: 40px; left: 0;
+            width: 100%;
+            background: rgb(217, 217, 217);
+            box-shadow: 0 2px 6px rgba(4, 2, 2, 0.9);
+            z-index: 1000;
+            text-align: center;
+        }
+        .inner-menu-item > a{
+            display: block;
+            padding: 5px 10px;
+            color:black
+        }
+        .inner-menu-item > a:hover{
+            background: black;
+            color:white
+        }
+    </style>
+    <!-- /* 5. 검색 양식 추가(내비게이션 내부 검색) */ -->
+    <style>
+        .search-bar{
+            height: 26px;
+            padding: 7px;
+            /* colorzilla를 사용해 선형 그레이디언트 사용 */
+            background: linear-gradient(to bottom,  #cdeb8e 0%,#a5c956 100%); 
+            border-radius: 20px;
+        }
+        .input-search{
+            display: block;
+            float: left;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 15px 0 0 15px;
+            /* inset하면 안쪽으로 */
+            box-shadow: inset 0 5px 5px rgba(210, 19, 19, 0.05);
+            width: 120px; height: 24px;
+            /* input에서 이거 중요한듯 radius했으면 */
+            padding: 0 0 0 10px;
+            font-size: 12px;
+            color:#555555;
+        }
+        .input-search:focus{
+            border-color:rgba(82, 168, 236, 0.8);
+            /* 이걸 해줌으로써 원래있는 외곽선 제거 */
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+        .input-search-submit{
+            /* float: left; */
+            width: 50px; height: 26px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid #cccccc;
+            /* 이걸해서 input이랑 딱 붙이게 만들어줌 */
+            margin-left: -1px;
+            /* vertical-align: top; */
+            /* 아래걸로 설정됨 */
+            display: inline-block;
+        }
+    </style>
+    <!-- 6. 본문 추가(중앙 내용) -->
+    <style>
+        
+        /* body 태그의 너비: 960px */
+        /* #page-wrapper 태그의 padding 속성으로 내용물 너비는 920px */
+        /* 자손들에게 float속성 지정하고 부모는 overflow를 hidden처리함 */
+        #content{overflow: hidden;}
+        #main-section{
+            float: left;
+            width: 710px;
+        }
+        /* page-wrapper의 padding크기 고려해야됨 */
+        #main-aside{
+            float: right;
+            width: 200px;
+        }
+        /* 반응형 웹 적용 사례 두가지 */
+        /* 태블릿화면 959px이하 */
+        @media screen and (max-width: 959px) {
+            #main-section {
+                float: none;
+                width: auto;
+            }
+
+            #main-aside {
+                float: none;
+                width: auto;
+                margin-top: 20px;
+            }
+        }
+        /* 모바일화면 767px이하 */
+        @media screen and (max-width: 767px) {
+            #main-aside {
+                display: none;
+            }
+        }
+    </style>
+    <!-- 6. 본문 추가(본문 포스트 위쪽) -->
+    <style>
+        .intro{
+            display: inline-block;
+            border-width: thick;
+            border-style: solid;
+            border-color: #2b9073;
+            border-radius: 20px 20px 20px 20px;
+            padding: 3px;
+        }
+        .intro > h2{
+            font-size: 1.1em;
+            /* inline-block해야 글씨만 감싼다 */
+            display: inline-block;
+            border-width: thin;
+            border-style: solid;
+            border-color: #383838;
+            border-radius: 20px 20px 20px 20px;
+            padding: 8px;
+            /* 백그라운드색 설정 */
+            background-color: olivedrab;
+        }
+        article{
+            /* 카드 UI 적용하기 */
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        .article-header{
+            padding: 20px 0; 
+            /* article-header에 date들 오른쪽 정렬 */
+            .font_right{text-align: right;}
+        }
+        .article-title{
+            font-size: 25px;
+            font-weight:500;
+            padding-bottom: 10px;
+            /* 그림자 넣기 */
+            text-shadow: 2px 2px 3px #BDFFBF;
+        }
+        .article-date{font-size: 13px;}
+        .article-body{font-size: 14px;}
+        /* 반응형 부분 */
+        article:hover{
+            /* 영역이 커짐 */
+            transform: scale(1.01);
+            /* 천천히 올라옴 */
+            transition: 0.3s;
+            /* 그림자 강화 */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+    <!-- 6. 본문 추가(우측사이드 메뉴) -->
+    <style>
+        .aside-list{padding: 15px 0;}
+        .aside-list > h3{
+            font-size: 15px;
+            font-weight: 600;
+        }
+        /* 가장 최근 달과 아들의 성장일기에 빨간색 표시 */
+        .aside-list li:last-child > a{color: red;}
+        /* 이거 뜻은 .aside-list아래 모든 li안에 a를 뜻함 */
+        .aside-list li a{
+            margin-left: 8px;
+            /* 부모랑 2px차이밖에 안남 */
+            font-size: 13px;
+            color: #6c6c6c;
+        }
+    </style>
+</head>
+<body>
+    <!-- 전체를 감싸는 태그 -->
+    <div id="page-wrapper">
+        <!-- 헤더 -->
+        <header id="main-header">
+            <hgroup>
+                <!-- 로고 넣기 -->
+                <img src="pictures\image.png" alt="로고자리" width="300">
+                <h1 class="master-title">배준영의 블로그</h1>
+                <h2 class="master-description font_italic font_bold">성결대학교</h2>
+            </hgroup>
+        </header>
+        <!-- 내비게이션 -->
+        <nav id="main-navigation">
+            <!-- 네비게이션 왼쪽 -->
+            <div class="pull-left">
+                <ul class="outer-menu">
+                    <!-- 나중에 여러 HTML 페이지들이 서로 연결되면서 하나의 웹사이트가 된다 -->
+                    <li href="index.html" class="outer-menu-item">
+                        <!-- 여기서는 span태그없이 바로 a태그 -->
+                        <a class="menu-title" href="index.html">Home</a>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title" >Prints Shop</span>
+                        <!-- 매장 여러개중 고를수있게 설정 -->
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item" ><a href="shop1.html">강남점</a></li>
+                            <li class="inner-menu-item" ><a href="shop2.html">이태원점</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <a href="likes.html" class="menu-title" id="button">My Likes</a>
+                    </li>
+                    <li class="outer-menu-item">
+                        <a href="faq.html" class="menu-title">FAQ</a>
+                    </li>
+                    <li class="outer-menu-item">
+                        <a href="about.html" class="menu-title">About us</a>
+                    </li>
+                    <li class="outer-menu-item">
+                        <a href="contact.html" class="menu-title">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 이걸로 전체 section이랑 aside스타일 적용가능 -->
+        <div id="content">
+            <!-- 인트로 -->
+            <section class="intro">
+                <h2>블로그 소개</h2>
+                <p>안녕하세요, 배준영입니다.</p>
+                <p>취미로 사진을 찍으며, 기억하고 싶은 순간들을 모아두고 있습니다.</p>
+                <p>자연, 인물, 여행, 일상 속 순간들을 기록하고 있습니다.</p>
+                <br>
+                <p>My Likes에서 좋아요 한 사진들을 확인하시고</p>
+                <p>Prints Shop에서 원하시는 사진을 액자로 구매하실 수 있습니다^^</p>
+                <p>카테고리를 통해 사진을 탐색하실 수 있습니다.</p>
+            </section>
+            <section id="main-section">
+                <article>
+                    <!-- 한 article안에 header랑 body부분나눔 -->
+                    <div class="article-header">
+                        <h1 class="article-title">싱가포르 </h1>
+                        <p class="article-date font_right font_bold">2023년 12월 4일</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="pictures\KakaoTalk_20251218_163909500.jpg" alt="" width="300">
+                        <br>
+                        <br>
+                        <p>이곳은 싱가포르를 방문했을 당시 신기하게 생긴 건축물이 물 위에 떠있길래 사진을 찍었습니다. </p>
+                        <br>
+                        <p>알고보니 해당 건축물은 플로팅 애플 스토어이였으며 독특한 돔 형태의 건축 디자인이 특징입니다.</p>
+                    </div>
+                </article>
+                <!-- section에 여러개 article들어갈수 있음 -->
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">본다이 비치</h1>
+                        <p class="article-date font_right font_bold">2023년 11월 11일</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="pictures\KakaoTalk_20251218_165655712.jpg" alt="" width="300">
+                        <br>
+                        <br>
+                        <p>호주 시드니를 대표하는 해변인 본다이 비치이며 맑은 물과 사람들로 북적였던 모습이 인상적이였습니다.</p>
+                        <br>
+                        <p>파도가 적당해서 초보자부터 숙련자까지 서핑을 즐기기에 완벽한 곳으로 알려져있습니다.</p>
+                    </div>
+                </article>
+            </section>
+            <aside id="main-aside">
+                <div class="search-bar">
+                    <!-- method="get" 써주기 -->
+                    <form action="" method="get">
+                        <input type="text" class="input-search">
+                        <input type="submit" class="input-search-submit" value="검색">
+                    </form>
+                </div>
+                <!-- aside 한 공간당 div(aside-list)로 나눔  -->
+                <div class="aside-list">
+                    <!-- h태그랑 a태그 같이쓰는거 상관없음 -->
+                    <h3><a href="#" id="popular-list">24시간 내 인기글</a></h3>
+                </div>
+                <div class="aside-list">
+                    <h3>갤러리</h3>
+                    <ul>
+                        <li><a href="gallery_nature.html">자연</a></li>
+                        <li><a href="#">인물</a></li>
+                        <li><a href="#">음식</a></li>
+                        <li><a href="#">동물</a></li>
+                        <li><a href="#">여행</a></li>
+                        <li><a href="#">일상</a></li>
+                        <li><a href="son_growup.html">아들 성장일기</a></li>
+                    </ul>
+                </div>
+                <div class="aside-list">
+                    <h3>아카이브</h3>
+                    <ul>
+                        <li><a href="jan_2025.html">2025년 1월</a></li>
+                        <li><a href="#">2025년 2월</a></li>
+                        <li><a href="#">2025년 3월</a></li>
+                        <li><a href="#">2025년 4월</a></li>
+                        <li><a href="#">2025년 5월</a></li>
+                        <li><a href="#">2025년 6월</a></li>
+                        <li><a href="#">2025년 7월</a></li>
+                        <li><a href="#">2025년 8월</a></li>
+                        <li><a href="#">2025년 9월</a></li>
+                        <li><a href="#">2025년 10월</a></li>
+                        <li><a href="nov.html">2025년 11월</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <footer id="main-footer"><a href="#">2025 My Blog - Created by Junyoung Bae</a></footer>
+    </div>
+</body>
+</html>

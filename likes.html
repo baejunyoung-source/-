@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>My Likes - 배준영의 사진 모음집</title>
+    <style>
+        body{
+            width: 960px;
+            margin: 0 auto;
+            background: rgb(87,42,131);
+            font-family: '맑은 고딕','Malgun Gothic','Gothic',sans-serif;
+            color: #333;
+        }
+        #page-wrapper{
+            background: #fff;
+            margin: 40px 0;
+            padding: 20px 30px;
+            border-radius: 5px;
+            box-shadow: 0 8px 6px rgba(219, 13, 13, 0.3);
+        }
+        h1{
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: rgb(60,60,60);
+        }
+        .photo-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .photo-item{
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .photo-item:hover{
+            transform: scale(1.03);
+        }
+        .photo-item img{
+            width: 100%;
+            border-radius: 5px;
+        }
+        .no-like{
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page-wrapper">
+        <a href="index.html" style="display:inline-block; padding:8px 16px; background:#4a2c8c; color:white; border-radius:6px; font-size:16px; font-weight:600; text-decoration:none; margin-bottom:15px;">Home</a>
+        <h1>내가 좋아요 한 사진들</h1>
+        <p>여기는 당신이 좋아요를 누른 사진들이 모이는 공간입니다.</p>
+
+        <!-- 좋아요한 사진이 없을 때 보여줄 영역 (기본 예시) -->
+        <div class="no-like">
+            <p>아직 좋아요한 사진이 없습니다.</p>
+            <p>사진 게시글에서 좋아요 버튼을 눌러보세요!</p>
+        </div>
+
+        <!-- 실제 좋아요 사진이 있을 때 보이는 그리드 예시 -->
+        <!-- 필요하면 아래 div 주석 해제하고 이미지 경로만 바꾸면 됨 -->
+        <!--
+        <div class="photo-grid">
+            <div class="photo-item"><img src="img1.jpg" alt="liked photo"></div>
+            <div class="photo-item"><img src="img2.jpg" alt="liked photo"></div>
+            <div class="photo-item"><img src="img3.jpg" alt="liked photo"></div>
+            <div class="photo-item"><img src="img4.jpg" alt="liked photo"></div>
+        </div>
+        -->
+    </div>
+</body>
+</html>
